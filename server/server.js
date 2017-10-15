@@ -3,6 +3,8 @@ const morgan = require("morgan");
 var path = require("path");
 
 var app = express();
+const port = process.env.PORT || 8881;
+
 
 const db = require("../db/db");
 
@@ -27,7 +29,7 @@ db.init(function (err) {
     }, (err) => {
         console.log("Unable to fetch todos", err);
     });
-    app.listen(8881); //database is initialized, ready to listen for connections
+    app.listen(port); //database is initialized, ready to listen for connections
 
 
 });
