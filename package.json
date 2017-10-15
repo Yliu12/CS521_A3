@@ -1,0 +1,23 @@
+{
+  "name": "cs521_a3",
+  "version": "1.0.0",
+  "description": "charts with D3",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "data",
+    "analysis",
+    "D3"
+  ],
+  "author": "Ying Liu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.1",
+    "mongodb": "^2.2.31",
+    "morgan": "^1.9.0",
+    "path": "^0.12.7"
+  }
+}
