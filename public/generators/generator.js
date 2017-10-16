@@ -14,6 +14,8 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
   return d;
 }
 
+
+
 function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
@@ -41,10 +43,13 @@ function generateLinks(listOfPlaceToGo) {
   var placeFrom = list.pop();
 
     list.forEach(function (placeTo) {
+        var distanec = getDistanceFromLatLonInKm(placeFrom.latitude,placeFrom.longitude,placeTo.latitude,placeTo.longitude);
       Links.push(
         {
             "source":placeFrom.name,
-            "target": placeTo.name
+            "target": placeTo.name+" in "+parseInt(distanec)+" km",
+            "distance":distanec
+
         });
     });
     placeFrom = list.pop();
@@ -3106,6 +3111,8 @@ var Partial =[
 ];
 
 var links = generateLinks(Partial);
+
+
 
 fs.writeFile('goodLinks.js', JSON.stringify(links), (err) => {
   if (err) throw err;

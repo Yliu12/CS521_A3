@@ -32,10 +32,10 @@ function myDashboardController($scope, $http) {
             "yQab5dxZzgBLTEHCw9V7_w": "Charlotte Douglas International Airport"
         });
 
-        $scope.getPieCharData(["Restaurants","Chinese"], '#d1-c1', 'Chinese Restaurents', $scope.d1c1);
-        $scope.getPieCharData(["Restaurants","Japanese"], '#d1-c3', 'Chinese Restaurents', $scope.d1c3);
-        $scope.getPieCharData(["Restaurants","Korean"], '#d1-c2', 'Chinese Restaurents', $scope.d1c2);
-        $scope.getPieCharData(["Restaurants","Thai"], '#d1-c01', 'Chinese Restaurents', $scope.d1c01);
+        $scope.getPieCharData(["Restaurants", "Chinese"], '#d1-c1', 'Chinese Restaurents', $scope.d1c1);
+        $scope.getPieCharData(["Restaurants", "Japanese"], '#d1-c3', 'Chinese Restaurents', $scope.d1c3);
+        $scope.getPieCharData(["Restaurants", "Korean"], '#d1-c2', 'Chinese Restaurents', $scope.d1c2);
+        $scope.getPieCharData(["Restaurants", "Thai"], '#d1-c01', 'Chinese Restaurents', $scope.d1c01);
 
     };
     $scope.makeMyDonutChart = (selector, data, title) => {
@@ -76,7 +76,7 @@ function myDashboardController($scope, $http) {
         return l;
     };
 
-    $scope.getPieCharData = function (categories, selector, title,target) {
+    $scope.getPieCharData = function (categories, selector, title, target) {
         $http({
             url: '/countstarsbycategories',
             method: "GET",
@@ -87,7 +87,7 @@ function myDashboardController($scope, $http) {
             debugger;
             console.log(resp);
             //var categories = ["<2", "2", "3", "4", "5"];
-            $scope[selector.replace("#","").replace("-","")] = $scope.makeMyDonutChart(selector, resp, title);
+            $scope[selector.replace("#", "").replace("-", "")] = $scope.makeMyDonutChart(selector, resp, title);
 
         }).error(function (data) {
             debugger;
@@ -96,7 +96,7 @@ function myDashboardController($scope, $http) {
         });
     };
 
-    $scope.makeMyBarChart = function (selector, chartType, colors, legend, charData, categories) {
+    $scope.makeMyBarChart = function (selector, chartType, colors, legend, charData, categories, labels) {
         debugger;
         return c3.generate({
             bindto: selector,
@@ -107,12 +107,24 @@ function myDashboardController($scope, $http) {
             axis: {
                 x: {
                     type: 'category',
-                    categories: categories
+                    categories: categories,
+                    label: {
+                        text: labels.x,
+                        position: 'outer-right'
+                    }
+                },
+                y: {
+                    categories: categories,
+                    label: {
+                        text: labels.y,
+                        position: 'outer-center'
+                    }
                 }
+
             },
             bar: {
                 width: {
-                    ratio: 0.8 // this makes bar width 50% of length between ticks
+                    ratio: 0.9 // this makes bar width 50% of length between ticks
                 }
                 // or
                 //width: 100 // this makes bar width 100px
@@ -137,7 +149,10 @@ function myDashboardController($scope, $http) {
             debugger;
             console.log(resp);
             var categories = ["<2", "2", "3", "4", "5"];
-            $scope.d1c5 = $scope.makeMyBarChart('#d1-c5', 'bar', ['#1abc9c', '#3498db', '#10011', '#00011', '#20011'], true, resp, categories);
+            $scope.d1c5 = $scope.makeMyBarChart('#d1-c5', 'bar', ['#1abc9c', '#3498db', '#10011', '#00011', '#20011'], true, resp, categories, {
+                x: "Stars",
+                y: "Number of Business"
+            });
 
         }).error(function (data) {
             debugger;
@@ -156,7 +171,10 @@ function myDashboardController($scope, $http) {
             debugger;
             console.log(resp);
             var categories = ["0:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
-            $scope.d1c4 = $scope.makeMyBarChart('#d1-c4', 'bar', ['#1abc9c', '#10011'], true, resp, categories);
+            $scope.d1c4 = $scope.makeMyBarChart('#d1-c4', 'bar', ['#1abc9c', '#10011'], true, resp, categories, {
+                x: "Hour",
+                y: "Number of Visit"
+            });
         }).error(function (data) {
             debugger;
             console.log('Error: ' + data);
