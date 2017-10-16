@@ -132,43 +132,70 @@
 </header>
 <div id="global" ng-controller="myDashboardController">
     <div class="container-fluid" ng-init='init()'>
-        <!--<div class="row">-->
-            <!--<div class="col-sm-4">-->
-                <!--<div class="panel panel-default">-->
-                    <!--<div class="panel-heading">C3 Gauge</div>-->
-                    <!--<div class="panel-body">-->
-                        <!--<div id="d1-c1" style="height:150px"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-sm-4">-->
-                <!--<div class="panel panel-default">-->
-                    <!--<div class="panel-heading">C3 Gauge</div>-->
-                    <!--<div class="panel-body">-->
-                        <!--<div id="d1-c2" style="height:150px"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-sm-4">-->
-                <!--<div class="panel panel-default">-->
-                    <!--<div class="panel-heading">C3 Gauge</div>-->
-                    <!--<div class="panel-body">-->
-                        <!--<div id="d1-c3" style="height:150px"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+
+        <!-- Pie Charts here -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Pie Chinese</div>
+                    <div class="panel-body">
+                        <div id="d1-c1" style="height:300px"></div>
+                        <button style="text-align: -webkit-center;" type="button" class="btn btn-success"
+                                ng-click="d1c1.transform('bar')">bar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Pie Korean</div>
+                    <div class="panel-body">
+                        <div id="d1-c2" style="height:300px"></div>
+                        <button style="text-align: -webkit-center;" type="button" class="btn btn-success"
+                                ng-click="d1c2.transform('bar')">bar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Pie Japanese</div>
+                    <div class="panel-body">
+                        <div id="d1-c3" style="height:300px"></div>
+                        <button style="text-align: -webkit-center;" type="button" class="btn btn-success"
+                                ng-click="d1c3.transform('bar')">bar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Pie Thai</div>
+                    <div class="panel-body">
+                        <div id="d1-c01" style="height:300px"></div>
+                        <button style="text-align: -webkit-center;" type="button" class="btn btn-success"
+                                ng-click="d1c01.transform('bar')">bar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="panel panel-default">
             <div class="panel-heading">Select Cities</div>
             <div class='panel-body'>
-                <div class='selectCityCheckBox' ng-repeat = "city in cityList">
+                <div class='selectCityCheckBox' ng-repeat="city in cityList">
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" ng-model="cbCities[city]"> {{city}}
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                   ng-model="cbCities[city]"> {{city}}
                         </label>
                     </div>
                 </div>
-                <button style = "text-align: -webkit-center;" type="button" class="btn btn-success" ng-click="pullData()" >Pull Data</button>
+                <button style="text-align: -webkit-center;" type="button" class="btn btn-success" ng-click="pullData()">
+                    Pull Data
+                </button>
             </div>
         </div>
         <div class="panel panel-default">
@@ -177,21 +204,30 @@
             <div class="panel-body">
                 <div id="d1-c5" style="height:320px"></div>
             </div>
-            <button style = "text-align: -webkit-center;" type="button" class="btn btn-success" ng-click="d1c5.transform('spline')" >spline</button>
-            <button style = "text-align: -webkit-center;" type="button" class="btn btn-success" ng-click="d1c5.transform('pie')" >pie</button>
-            <button style = "text-align: -webkit-center;" type="button" class="btn btn-success" ng-click="d1c5.transform('bar','Cleveland')" >bar(Cleveland)</button>
-            <button style = "text-align: -webkit-center;" type="button" class="btn btn-success" ng-click="d1c5.transform('pie','Las Vegas')" >pie(Las Vegas)</button>
-            <button style = "text-align: -webkit-center;" type="button" class="btn btn-success" ng-click="d1c5.transform('bar')" >bar</button>
-
-
+            <button style="text-align: -webkit-center;" type="button" class="btn btn-success"
+                    ng-click="d1c5.transform('spline')">spline
+            </button>
+            <button style="text-align: -webkit-center;" type="button" class="btn btn-success"
+                    ng-click="d1c5.transform('pie')">pie
+            </button>
+            <button style="text-align: -webkit-center;" type="button" class="btn btn-success"
+                    ng-click="d1c5.transform('bar','Cleveland')">bar(Cleveland)
+            </button>
+            <button style="text-align: -webkit-center;" type="button" class="btn btn-success"
+                    ng-click="d1c5.transform('bar')">bar
+            </button>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">C3 Splines</div>
             <div class="panel-body">
                 <div id="d1-c4" style="height:320px"></div>
             </div>
-            <button style = "text-align: -webkit-center;" type="button" class="btn btn-success" ng-click="d1c4.transform('spline')" >spline</button>
-            <button style = "text-align: -webkit-center;" type="button" class="btn btn-success" ng-click="d1c4.transform('bar')" >bar</button>
+            <button style="text-align: -webkit-center;" type="button" class="btn btn-success"
+                    ng-click="d1c4.transform('spline')">spline
+            </button>
+            <button style="text-align: -webkit-center;" type="button" class="btn btn-success"
+                    ng-click="d1c4.transform('bar')">bar
+            </button>
         </div>
         <div class="alert alert-info shadowed" role="alert"><i class="fa fa-fw fa-info-circle"></i> C3.js chart library
             by Masayuki Tanaka (MIT): <a href="http://c3js.org/">http://c3js.org/</a></div>

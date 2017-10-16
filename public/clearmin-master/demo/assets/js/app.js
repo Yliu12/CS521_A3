@@ -30,12 +30,43 @@ function myDashboardController($scope, $http) {
         $scope.getHistogramData({
             "4JNXUYY8wbaaDmk3BPzlWw": "Mon Ami Gabi",
             "yQab5dxZzgBLTEHCw9V7_w": "Charlotte Douglas International Airport"
-        })
+        });
+
+        $scope.getPieCharData(["Restaurants","Chinese"], '#d1-c1', 'Chinese Restaurents', $scope.d1c1);
+        $scope.getPieCharData(["Restaurants","Japanese"], '#d1-c3', 'Chinese Restaurents', $scope.d1c3);
+        $scope.getPieCharData(["Restaurants","Korean"], '#d1-c2', 'Chinese Restaurents', $scope.d1c2);
+        $scope.getPieCharData(["Restaurants","Thai"], '#d1-c01', 'Chinese Restaurents', $scope.d1c01);
+
     };
+    $scope.makeMyDonutChart = (selector, data, title) => {
+        return c3.generate({
+            bindto: selector,
+            data: {
+                columns: data,
+                type: 'pie',
+                onclick: function (d, i) {
+                    console.log("onclick", d, i);
+                },
+                onmouseover: function (d, i) {
+                    console.log("onmouseover", d, i);
+                },
+                onmouseout: function (d, i) {
+                    console.log("onmouseout", d, i);
+                }
+            },
+            donut: {
+                title: title
+            }
+        });
+
+    };
+
+
     $scope.pullData = function () {
         debugger;
         $scope.getBarCharData($scope.cbToList($scope.cbCities));
     };
+
     $scope.cbToList = function (cb) {
         var l = [];
         for (city in cb) {
@@ -45,29 +76,26 @@ function myDashboardController($scope, $http) {
         return l;
     };
 
-    $scope.getMajors = function () {
-        debugger;
-        $scope.selectedcuid = chinaUkeyMap[$scope.selectedU];
-        $scope.majorDataAvaliable = false;
-
+    $scope.getPieCharData = function (categories, selector, title,target) {
         $http({
-            url: '/api/majorunderchinaU',
+            url: '/countstarsbycategories',
             method: "GET",
             params: {
-                cuid: $scope.selectedcuid
+                categories: categories
             }
-        }).success(function (data) {
+        }).success(function (resp) {
             debugger;
-            $scope.ddlCUMajor = data.keyValPair;
-            $scope.CUMajorDict = data.dict;
-            $scope.majorDataAvaliable = true;
+            console.log(resp);
+            //var categories = ["<2", "2", "3", "4", "5"];
+            $scope[selector.replace("#","").replace("-","")] = $scope.makeMyDonutChart(selector, resp, title);
 
-            console.log(data);
         }).error(function (data) {
             debugger;
             console.log('Error: ' + data);
+            return null;
         });
     };
+
     $scope.makeMyBarChart = function (selector, chartType, colors, legend, charData, categories) {
         debugger;
         return c3.generate({
@@ -108,15 +136,15 @@ function myDashboardController($scope, $http) {
         }).success(function (resp) {
             debugger;
             console.log(resp);
-            var categories = ["0", "1", "2", "3", "4", "5"];
+            var categories = ["<2", "2", "3", "4", "5"];
             $scope.d1c5 = $scope.makeMyBarChart('#d1-c5', 'bar', ['#1abc9c', '#3498db', '#10011', '#00011', '#20011'], true, resp, categories);
 
         }).error(function (data) {
             debugger;
             console.log('Error: ' + data);
         });
-
     };
+
     $scope.getHistogramData = function (businessDatas) {
         $http({
             url: '/checkinforhistogram',
