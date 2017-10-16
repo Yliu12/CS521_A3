@@ -1,13 +1,15 @@
+var fs = require('fs');
+
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1); 
-  var a = 
+  var dLon = deg2rad(lon2-lon1);
+  var a =
     Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
     Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   var d = R * c; // Distance in km
   return d;
 }
@@ -15,7 +17,51 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
+function generateLinks(listOfPlaceToGo) {
+  debugger;
+  var Links = [];
+  var list = listOfPlaceToGo.slice();
+  var placeFrom = list.pop();
+  while(placeFrom!=null){
+    list.forEach(function (placeTo) {
+      Links.push(
+        {
+            "source":placeFrom.name,
+            "target": placeTo.name
+        });
+    });
+    placeFrom = list.pop();
+  }
+  return Links;
+};
+function generateLinks(listOfPlaceToGo) {
+  debugger;
+  var Links = [];
+  var list = listOfPlaceToGo.slice();
+  var placeFrom = list.pop();
 
+    list.forEach(function (placeTo) {
+      Links.push(
+        {
+            "source":placeFrom.name,
+            "target": placeTo.name
+        });
+    });
+    placeFrom = list.pop();
+
+  return Links;
+}
+/*
+{
+    "source": "Analytics",
+    "target": "Science"
+}
+*/
+
+[{
+    "source": "Analytics",
+    "target": "Science"
+}]
 
 var listOfPlaceToGoInCleveland =[
     {
@@ -2360,4 +2406,708 @@ var listOfPlaceToGoInCleveland =[
             "Saturday": "12:00-21:00"
         }
     }
-]
+];
+
+var Partial =[
+
+    {
+        "_id": "59e11b71bc0921e5e28dfd1e",
+        "business_id": "oWHZtv98YyKvSennjtBuAA",
+        "name": "Pour Cleveland",
+        "neighborhood": "Gateway District",
+        "address": "530 Euclid Ave",
+        "city": "Cleveland",
+        "state": "OH",
+        "postal_code": "44115",
+        "latitude": 41.4997856453,
+        "longitude": -81.6890940914,
+        "stars": 4.5,
+        "review_count": 227,
+        "is_open": 1,
+        "attributes": {
+            "GoodForMeal": {
+                "dessert": false,
+                "latenight": false,
+                "lunch": false,
+                "dinner": false,
+                "breakfast": false,
+                "brunch": false
+            },
+            "Alcohol": "none",
+            "Caters": false,
+            "WiFi": "free",
+            "OutdoorSeating": true,
+            "BusinessAcceptsCreditCards": true,
+            "RestaurantsPriceRange2": 2,
+            "BusinessAcceptsBitcoin": false,
+            "BikeParking": true,
+            "RestaurantsDelivery": false,
+            "RestaurantsTakeOut": true,
+            "WheelchairAccessible": true,
+            "BusinessParking": {
+                "garage": false,
+                "street": true,
+                "validated": false,
+                "lot": false,
+                "valet": false
+            }
+        },
+        "categories": [
+            "Food",
+            "Coffee & Tea"
+        ],
+        "hours": {
+            "Monday": "7:00-18:00",
+            "Tuesday": "7:00-18:00",
+            "Friday": "7:00-18:00",
+            "Wednesday": "7:00-18:00",
+            "Thursday": "7:00-18:00",
+            "Sunday": "9:00-16:00",
+            "Saturday": "8:00-17:00"
+        }
+    },
+    {
+        "_id": "59e11b77bc0921e5e28e2382",
+        "business_id": "5VXxZIMgoKRWbNa6x9kMfw",
+        "name": "Sweet Moses",
+        "neighborhood": "Detroit-Shoreway",
+        "address": "6800 Detroit Ave",
+        "city": "Cleveland",
+        "state": "OH",
+        "postal_code": "44102",
+        "latitude": 41.4838499,
+        "longitude": -81.731936,
+        "stars": 4.5,
+        "review_count": 308,
+        "is_open": 1,
+        "attributes": {
+            "BusinessParking": {
+                "garage": false,
+                "street": true,
+                "validated": false,
+                "lot": false,
+                "valet": false
+            },
+            "WiFi": "no",
+            "BusinessAcceptsCreditCards": true,
+            "RestaurantsPriceRange2": 2,
+            "BikeParking": true,
+            "WheelchairAccessible": true
+        },
+        "categories": [
+            "Ice Cream & Frozen Yogurt",
+            "Desserts",
+            "Food",
+            "Chocolatiers & Shops",
+            "Specialty Food"
+        ],
+        "hours": {
+            "Monday": "12:00-22:00",
+            "Tuesday": "12:00-22:00",
+            "Friday": "12:00-0:00",
+            "Wednesday": "12:00-22:00",
+            "Thursday": "12:00-22:00",
+            "Sunday": "12:00-22:00",
+            "Saturday": "12:00-0:00"
+        }
+    },
+    {
+        "_id": "59e11b7abc0921e5e28e3a40",
+        "business_id": "LtDYRcMJbJPhXPEklT29Fw",
+        "name": "EDWINS Leadership and Restaurant Institute",
+        "neighborhood": "",
+        "address": "13101 Shaker Sq",
+        "city": "Cleveland",
+        "state": "OH",
+        "postal_code": "44120",
+        "latitude": 41.4842350467,
+        "longitude": -81.5913967755,
+        "stars": 4.5,
+        "review_count": 118,
+        "is_open": 1,
+        "attributes": {
+            "Alcohol": "full_bar",
+            "HasTV": true,
+            "NoiseLevel": "average",
+            "RestaurantsAttire": "dressy",
+            "BusinessAcceptsCreditCards": true,
+            "Ambience": {
+                "romantic": true,
+                "intimate": false,
+                "classy": true,
+                "hipster": false,
+                "divey": false,
+                "touristy": false,
+                "trendy": false,
+                "upscale": false,
+                "casual": false
+            },
+            "RestaurantsGoodForGroups": true,
+            "Caters": true,
+            "WiFi": "free",
+            "RestaurantsReservations": true,
+            "BusinessAcceptsBitcoin": false,
+            "RestaurantsTableService": true,
+            "RestaurantsTakeOut": true,
+            "GoodForKids": false,
+            "WheelchairAccessible": true,
+            "DogsAllowed": false,
+            "BikeParking": true,
+            "OutdoorSeating": true,
+            "RestaurantsPriceRange2": 3,
+            "RestaurantsDelivery": false,
+            "GoodForMeal": {
+                "dessert": false,
+                "latenight": false,
+                "lunch": false,
+                "dinner": true,
+                "breakfast": false,
+                "brunch": false
+            },
+            "BusinessParking": {
+                "garage": false,
+                "street": false,
+                "validated": false,
+                "lot": false,
+                "valet": true
+            }
+        },
+        "categories": [
+            "French",
+            "Cooking Schools",
+            "Adult Education",
+            "Restaurants",
+            "Specialty Schools",
+            "Education"
+        ],
+        "hours": {
+            "Monday": "16:00-22:00",
+            "Tuesday": "16:00-22:00",
+            "Friday": "16:00-23:30",
+            "Wednesday": "16:00-22:00",
+            "Thursday": "16:00-23:30",
+            "Saturday": "16:00-23:30"
+        }
+    },
+    {
+        "_id": "59e11b7abc0921e5e28e3d17",
+        "business_id": "9LAXz_VfATZ0kLdaavkN4g",
+        "name": "Bakersfield",
+        "neighborhood": "Ohio City",
+        "address": "2058 West 25th St",
+        "city": "Cleveland",
+        "state": "OH",
+        "postal_code": "44113",
+        "latitude": 41.4832899915,
+        "longitude": -81.7029820383,
+        "stars": 4.5,
+        "review_count": 137,
+        "is_open": 1,
+        "attributes": {
+            "Alcohol": "full_bar",
+            "HasTV": true,
+            "NoiseLevel": "loud",
+            "RestaurantsAttire": "casual",
+            "BusinessAcceptsCreditCards": true,
+            "Music": {
+                "dj": false,
+                "background_music": true,
+                "no_music": false,
+                "karaoke": false,
+                "live": false,
+                "video": false,
+                "jukebox": false
+            },
+            "Ambience": {
+                "romantic": false,
+                "intimate": false,
+                "classy": false,
+                "hipster": false,
+                "divey": false,
+                "touristy": false,
+                "trendy": true,
+                "upscale": false,
+                "casual": false
+            },
+            "RestaurantsGoodForGroups": true,
+            "Caters": false,
+            "WiFi": "no",
+            "RestaurantsReservations": false,
+            "BusinessAcceptsBitcoin": false,
+            "RestaurantsTableService": true,
+            "RestaurantsTakeOut": true,
+            "GoodForKids": false,
+            "HappyHour": true,
+            "GoodForDancing": false,
+            "DogsAllowed": false,
+            "BikeParking": false,
+            "OutdoorSeating": false,
+            "RestaurantsPriceRange2": 2,
+            "RestaurantsDelivery": false,
+            "GoodForMeal": {
+                "dessert": false,
+                "latenight": false,
+                "lunch": true,
+                "dinner": true,
+                "breakfast": false,
+                "brunch": false
+            },
+            "BusinessParking": {
+                "garage": false,
+                "street": true,
+                "validated": false,
+                "lot": false,
+                "valet": false
+            },
+            "CoatCheck": false,
+            "Smoking": "no",
+            "WheelchairAccessible": true
+        },
+        "categories": [
+            "Mexican",
+            "Bars",
+            "Tex-Mex",
+            "Nightlife",
+            "Restaurants",
+            "Cocktail Bars"
+        ],
+        "hours": {
+            "Monday": "11:00-0:00",
+            "Tuesday": "11:00-0:00",
+            "Friday": "11:00-2:00",
+            "Wednesday": "11:00-0:00",
+            "Thursday": "11:00-0:00",
+            "Sunday": "11:00-0:00",
+            "Saturday": "11:00-2:00"
+        }
+    },
+    {
+        "_id": "59e11b7ebc0921e5e28e4fb2",
+        "business_id": "ogmjK0R0K9vpPTfhNKrXzg",
+        "name": "Rising Star Coffee Roasters",
+        "neighborhood": "Ohio City",
+        "address": "1455 W 29th St",
+        "city": "Cleveland",
+        "state": "OH",
+        "postal_code": "44113",
+        "latitude": 41.4892154,
+        "longitude": -81.7102524,
+        "stars": 4.5,
+        "review_count": 189,
+        "is_open": 1,
+        "attributes": {
+            "Alcohol": "none",
+            "Caters": false,
+            "WiFi": "free",
+            "OutdoorSeating": true,
+            "BusinessAcceptsCreditCards": true,
+            "RestaurantsPriceRange2": 1,
+            "BusinessAcceptsBitcoin": false,
+            "BikeParking": true,
+            "RestaurantsDelivery": false,
+            "RestaurantsTakeOut": true,
+            "WheelchairAccessible": true,
+            "BusinessParking": {
+                "garage": false,
+                "street": true,
+                "validated": false,
+                "lot": false,
+                "valet": false
+            }
+        },
+        "categories": [
+            "Food",
+            "Coffee Roasteries",
+            "Coffee & Tea"
+        ],
+        "hours": {
+            "Monday": "6:00-18:00",
+            "Tuesday": "6:00-18:00",
+            "Friday": "6:00-20:00",
+            "Wednesday": "6:00-18:00",
+            "Thursday": "6:00-18:00",
+            "Sunday": "8:00-18:00",
+            "Saturday": "6:00-20:00"
+        }
+    },
+    {
+        "_id": "59e11b7fbc0921e5e28e58de",
+        "business_id": "tjqK6lgvoIbRkQ7QuKRAFQ",
+        "name": "The Loop",
+        "neighborhood": "Tremont",
+        "address": "2180 W 11th St",
+        "city": "Cleveland",
+        "state": "OH",
+        "postal_code": "44113",
+        "latitude": 41.482357,
+        "longitude": -81.6895386,
+        "stars": 4.5,
+        "review_count": 126,
+        "is_open": 1,
+        "attributes": {
+            "BusinessParking": {
+                "garage": false,
+                "street": true,
+                "validated": false,
+                "lot": false,
+                "valet": false
+            },
+            "Caters": false,
+            "WiFi": "free",
+            "OutdoorSeating": true,
+            "BusinessAcceptsCreditCards": true,
+            "RestaurantsPriceRange2": 1,
+            "BusinessAcceptsBitcoin": false,
+            "BikeParking": true,
+            "RestaurantsTakeOut": true,
+            "WheelchairAccessible": true
+        },
+        "categories": [
+            "Music & DVDs",
+            "Vinyl Records",
+            "Books",
+            "Mags",
+            "Music & Video",
+            "Food",
+            "Coffee & Tea",
+            "Shopping"
+        ],
+        "hours": {
+            "Monday": "7:00-21:00",
+            "Tuesday": "7:00-21:00",
+            "Friday": "7:00-22:00",
+            "Wednesday": "7:00-21:00",
+            "Thursday": "7:00-21:00",
+            "Sunday": "10:00-18:00",
+            "Saturday": "8:00-22:00"
+        }
+    },
+    {
+        "_id": "59e11b81bc0921e5e28e6748",
+        "business_id": "kXIJwryYY2xDHNnI7jz-WQ",
+        "name": "Pho Thang Cafe",
+        "neighborhood": "Civic Center",
+        "address": "815 Superior Ave E",
+        "city": "Cleveland",
+        "state": "OH",
+        "postal_code": "44114",
+        "latitude": 41.5024433,
+        "longitude": -81.6893526,
+        "stars": 4.5,
+        "review_count": 173,
+        "is_open": 1,
+        "attributes": {
+            "Alcohol": "beer_and_wine",
+            "HasTV": true,
+            "NoiseLevel": "average",
+            "RestaurantsAttire": "casual",
+            "BusinessAcceptsCreditCards": true,
+            "Ambience": {
+                "romantic": false,
+                "intimate": false,
+                "classy": false,
+                "hipster": false,
+                "divey": false,
+                "touristy": false,
+                "trendy": false,
+                "upscale": false,
+                "casual": true
+            },
+            "RestaurantsGoodForGroups": true,
+            "Caters": false,
+            "WiFi": "free",
+            "RestaurantsReservations": true,
+            "BusinessAcceptsBitcoin": true,
+            "RestaurantsTableService": true,
+            "RestaurantsTakeOut": true,
+            "GoodForKids": true,
+            "WheelchairAccessible": true,
+            "DogsAllowed": false,
+            "BikeParking": true,
+            "OutdoorSeating": false,
+            "RestaurantsPriceRange2": 2,
+            "RestaurantsDelivery": true,
+            "GoodForMeal": {
+                "dessert": false,
+                "latenight": false,
+                "lunch": true,
+                "dinner": true,
+                "breakfast": false,
+                "brunch": false
+            },
+            "BusinessParking": {
+                "garage": false,
+                "street": true,
+                "validated": false,
+                "lot": false,
+                "valet": false
+            }
+        },
+        "categories": [
+            "Vietnamese",
+            "Restaurants"
+        ],
+        "hours": {
+            "Monday": "11:00-22:00",
+            "Tuesday": "11:00-22:00",
+            "Friday": "11:00-23:00",
+            "Wednesday": "11:00-22:00",
+            "Thursday": "11:00-22:00",
+            "Sunday": "11:00-19:00",
+            "Saturday": "11:00-23:00"
+        }
+    },
+    {
+        "_id": "59e11b88bc0921e5e28e930c",
+        "business_id": "9gXWjHAhDpzy1x6khHehrw",
+        "name": "Graffiti: A Social Kitchen",
+        "neighborhood": "Detroit-Shoreway",
+        "address": "1261 W 76th St",
+        "city": "Cleveland",
+        "state": "OH",
+        "postal_code": "44102",
+        "latitude": 41.485856,
+        "longitude": -81.737258,
+        "stars": 4.5,
+        "review_count": 124,
+        "is_open": 1,
+        "attributes": {
+            "Alcohol": "full_bar",
+            "HasTV": true,
+            "NoiseLevel": "average",
+            "RestaurantsAttire": "casual",
+            "BusinessAcceptsCreditCards": true,
+            "Music": {
+                "dj": false,
+                "background_music": false,
+                "no_music": false,
+                "karaoke": false,
+                "live": false,
+                "video": false,
+                "jukebox": false
+            },
+            "Ambience": {
+                "romantic": false,
+                "intimate": false,
+                "classy": false,
+                "hipster": false,
+                "divey": false,
+                "touristy": false,
+                "trendy": false,
+                "upscale": false,
+                "casual": true
+            },
+            "RestaurantsGoodForGroups": true,
+            "Caters": false,
+            "WiFi": "free",
+            "RestaurantsReservations": true,
+            "RestaurantsTableService": true,
+            "RestaurantsTakeOut": false,
+            "GoodForKids": false,
+            "HappyHour": true,
+            "GoodForDancing": false,
+            "BikeParking": true,
+            "OutdoorSeating": true,
+            "RestaurantsPriceRange2": 2,
+            "RestaurantsDelivery": false,
+            "BestNights": {
+                "monday": false,
+                "tuesday": false,
+                "friday": false,
+                "wednesday": false,
+                "thursday": false,
+                "sunday": true,
+                "saturday": false
+            },
+            "GoodForMeal": {
+                "dessert": false,
+                "latenight": false,
+                "lunch": false,
+                "dinner": true,
+                "breakfast": false,
+                "brunch": true
+            },
+            "BusinessParking": {
+                "garage": false,
+                "street": true,
+                "validated": false,
+                "lot": false,
+                "valet": false
+            },
+            "CoatCheck": false
+        },
+        "categories": [
+            "Nightlife",
+            "American (New)",
+            "Restaurants",
+            "Bars"
+        ],
+        "hours": {
+            "Tuesday": "17:00-23:00",
+            "Friday": "17:00-0:00",
+            "Wednesday": "17:00-23:00",
+            "Thursday": "17:00-23:00",
+            "Sunday": "10:00-15:00",
+            "Saturday": "17:00-0:00"
+        }
+    },
+    {
+        "_id": "59e11b88bc0921e5e28e961a",
+        "business_id": "SoCjdgcYyj05tSPWz6MUXg",
+        "name": "Pupuseria La Bendicion",
+        "neighborhood": "West Boulevard",
+        "address": "3685 W 105th St",
+        "city": "Cleveland",
+        "state": "OH",
+        "postal_code": "44111",
+        "latitude": 41.4521577,
+        "longitude": -81.7592398,
+        "stars": 4.5,
+        "review_count": 110,
+        "is_open": 1,
+        "attributes": {
+            "RestaurantsTableService": false,
+            "GoodForMeal": {
+                "dessert": false,
+                "latenight": false,
+                "lunch": true,
+                "dinner": true,
+                "breakfast": false,
+                "brunch": false
+            },
+            "Alcohol": "none",
+            "Caters": false,
+            "HasTV": true,
+            "RestaurantsGoodForGroups": false,
+            "NoiseLevel": "average",
+            "WiFi": "no",
+            "RestaurantsAttire": "casual",
+            "RestaurantsReservations": false,
+            "OutdoorSeating": false,
+            "BusinessAcceptsCreditCards": true,
+            "RestaurantsPriceRange2": 1,
+            "BikeParking": true,
+            "RestaurantsDelivery": false,
+            "Ambience": {
+                "romantic": false,
+                "intimate": false,
+                "classy": false,
+                "hipster": false,
+                "divey": true,
+                "touristy": false,
+                "trendy": false,
+                "upscale": false,
+                "casual": false
+            },
+            "RestaurantsTakeOut": true,
+            "GoodForKids": true,
+            "BusinessParking": {
+                "garage": false,
+                "street": false,
+                "validated": false,
+                "lot": true,
+                "valet": false
+            }
+        },
+        "categories": [
+            "Salvadoran",
+            "Food",
+            "Specialty Food",
+            "Latin American",
+            "Imported Food",
+            "Colombian",
+            "Ethnic Food",
+            "Restaurants"
+        ],
+        "hours": {
+            "Tuesday": "11:00-21:00",
+            "Friday": "11:00-22:00",
+            "Wednesday": "11:00-21:00",
+            "Thursday": "11:00-21:00",
+            "Sunday": "11:00-21:00",
+            "Saturday": "11:00-22:00"
+        }
+    },
+    {
+        "_id": "59e11b8dbc0921e5e28eb6dd",
+        "business_id": "Y-oPVMkxgEsve1sG2iDLXA",
+        "name": "Citizen Pie",
+        "neighborhood": "Northeast Shores",
+        "address": "15710 Waterloo Rd",
+        "city": "Cleveland",
+        "state": "OH",
+        "postal_code": "44110",
+        "latitude": 41.5711347191,
+        "longitude": -81.5705552082,
+        "stars": 4.5,
+        "review_count": 104,
+        "is_open": 1,
+        "attributes": {
+            "Alcohol": "beer_and_wine",
+            "HasTV": false,
+            "NoiseLevel": "average",
+            "RestaurantsAttire": "casual",
+            "BusinessAcceptsCreditCards": true,
+            "Ambience": {
+                "romantic": false,
+                "intimate": false,
+                "classy": false,
+                "hipster": false,
+                "divey": false,
+                "touristy": false,
+                "trendy": true,
+                "upscale": false,
+                "casual": true
+            },
+            "RestaurantsGoodForGroups": false,
+            "Caters": false,
+            "WiFi": "no",
+            "RestaurantsReservations": false,
+            "BusinessAcceptsBitcoin": false,
+            "RestaurantsTableService": false,
+            "RestaurantsTakeOut": true,
+            "GoodForKids": true,
+            "WheelchairAccessible": true,
+            "DogsAllowed": false,
+            "BikeParking": true,
+            "OutdoorSeating": false,
+            "RestaurantsPriceRange2": 2,
+            "RestaurantsDelivery": false,
+            "GoodForMeal": {
+                "dessert": false,
+                "latenight": false,
+                "lunch": true,
+                "dinner": true,
+                "breakfast": false,
+                "brunch": false
+            },
+            "BusinessParking": {
+                "garage": false,
+                "street": true,
+                "validated": false,
+                "lot": false,
+                "valet": false
+            }
+        },
+        "categories": [
+            "Pizza",
+            "Restaurants"
+        ],
+        "hours": {
+            "Monday": "12:00-21:00",
+            "Tuesday": "12:00-21:00",
+            "Friday": "12:00-21:00",
+            "Wednesday": "12:00-21:00",
+            "Thursday": "12:00-21:00",
+            "Sunday": "12:00-19:00",
+            "Saturday": "12:00-21:00"
+        }
+    }
+];
+
+var links = generateLinks(Partial);
+
+fs.writeFile('goodLinks.js', JSON.stringify(links), (err) => {
+  if (err) throw err;
+  console.log('The file has been saved!');
+});
