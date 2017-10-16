@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, "../public/clearmin-master/demo")));
 //     res.sendFile(path.join(__dirname , "../public/clearmin-master/demo/dashboard-sales.html"));
 //     //res.render("selectschool.html");
 // });
+Object.values = (obj) => Object.keys(obj).map(key => obj[key]);
 
 
 db.init(function (err) {
@@ -161,4 +162,3 @@ parsePieData = (categories, callback) => {
 
     });
 };
-
